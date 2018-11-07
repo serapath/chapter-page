@@ -1,0 +1,31 @@
+{
+  "name": "chapter-page",
+  "version": "0.0.0",
+  "description": "make a theme-able community chapter page",
+  "main": "src/chapter-page.js",
+  "scripts": {
+    "start": "budo index.js:bundle.js --open --live --ssl",
+    "build": "browserify index.js > bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serapath/chapter-page.git"
+  },
+  "keywords": [
+    "chapter",
+    "component",
+    "page",
+    "website",
+    "webpage"
+  ],
+  "author": "@serapath",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/serapath/chapter-page/issues"
+  },
+  "homepage": "https://github.com/serapath/chapter-page#readme",
+  "devDependencies": {
+    "budo": "^11.5.0"
+  }
+}
