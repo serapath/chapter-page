@@ -1,6 +1,6 @@
 module.exports = chapterpage
 
-function chapterpage ({ data = {}, theme = {} }) {
+function chapterpage ({ data = {}, theme = {} } = {}) {
   const {
     color0 = '',
     color1 = '',
@@ -25,7 +25,8 @@ function chapterpage ({ data = {}, theme = {} }) {
     fontsize8 = '',
     fontsize9 = '',
   } = theme.fontsizes || {}
-  const { title, place, time, event, home, logo, tabs = [], chat, chapters } = data
+  const { face0 } = theme.faces || { face0: { name: 'C64', url: 'assets/C64_Pro-STYLE.woff' } }
+  const { title, place, time, event, home, logo, tabs = [], chat, chapters = [] } = data
   const head = `
     <title> WizardAmigos Chapter - ${title} </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -39,8 +40,8 @@ function chapterpage ({ data = {}, theme = {} }) {
       }
       *,*:before,*:after { box-sizing  : inherit; }
       @font-face    {
-        font-family : C64;
-        src         : url(assets/C64_Pro-STYLE.woff);
+        font-family : ${face0.name};
+        src         : url(${face0.url});
       }
       body {
         display: flex;
@@ -50,7 +51,7 @@ function chapterpage ({ data = {}, theme = {} }) {
         margin: 0;
         height: 100vh;
         width: 100vw;
-        background-color: #43409a;
+        background-color: ${color1};
       }
       h3 {
         color: ${color8};
@@ -64,13 +65,13 @@ function chapterpage ({ data = {}, theme = {} }) {
         font-weight: bold;
         flex-grow: 1;
         color: ${color5};
-        background-color: pink;
+        background-color: ${color0};
         border: 1px solid black;
         cursor: pointer;
       }
       .active {
         color: ${color8};
-        background-color: violet;
+        background-color: ${color9};
         border: 1px solid black;
       }
       .iframe {
@@ -113,7 +114,7 @@ function chapterpage ({ data = {}, theme = {} }) {
       }
       .title1 {
         color: ${color8};
-        font-family: C64;
+        font-family: ${face0.name};
         margin-left: 10vw;
         font-size: 30px;
       }
@@ -122,7 +123,7 @@ function chapterpage ({ data = {}, theme = {} }) {
       }
       .title2 {
         color: ${color3};
-        font-family: C64;
+        font-family: ${face0.name};
         margin-left: 10vw;
         font-size: 20px;
       }
@@ -136,12 +137,12 @@ function chapterpage ({ data = {}, theme = {} }) {
       .webring {
         text-decoration: underline;
         color: ${color4};
-        font-family: C64;
+        font-family: ${face0.name};
         font-size: 30px;
       }
       .chapter {
         color: ${color3};
-        font-family: C64;
+        font-family: ${face0.name};
         font-size: 15px;
       }
       .chapter-list {
@@ -168,10 +169,10 @@ function chapterpage ({ data = {}, theme = {} }) {
           ${tabs.length > 1 ? tabs.map(({ title, url }, i) => `
             <button url="${url}" class="${i ? 'tab' : 'tab active'}">${title}</button>`).join('\n') : ''
         }</div>
-        <iframe id="tab" width="100%" height="100%" frameborder="0"
+        ${tabs.length > 1 ? `<iframe id="tab" width="100%" height="100%" frameborder="0"
           src="${tabs[0].url}"
           allow="geolocation; microphone; camera; autoplay; encrypted-media" allowfullscreen="true">
-        </iframe>
+        </iframe>`: '' }
       </div>
       <iframe class="iframe" src="${chat}"></iframe>
     </div>
